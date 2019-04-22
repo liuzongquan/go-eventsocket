@@ -333,11 +333,11 @@ func (h *Connection) Send(command string) (*Event, error) {
 	fmt.Fprintf(h.conn, "%s\r\n\r\n", command)
 	var (
 		ev  *Event
-		err error
+// 		err error
 	)
 	select {
-	case err = <-h.err:
-		return nil, err
+// 	case err = <-h.err:
+// 		return nil, err
 	case ev = <-h.cmd:
 		return ev, nil
 	case ev = <-h.api:

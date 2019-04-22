@@ -264,11 +264,11 @@ func (h *Connection) Close() {
 func (h *Connection) ReadEvent() (*Event, error) {
 	var (
 		ev  *Event
-		err error
+// 		err error
 	)
 	select {
-	case err = <-h.err:
-		return nil, err
+// 	case err = <-h.err:
+// 		return nil, err
 	case ev = <-h.evt:
 		return ev, nil
 	}

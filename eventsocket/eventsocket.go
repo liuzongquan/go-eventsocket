@@ -40,7 +40,6 @@ var errMissingAuthRequest = errors.New("Missing auth request")
 var errInvalidPassword = errors.New("Invalid password")
 var errInvalidCommand = errors.New("Invalid command contains \\r or \\n")
 var errTimeout = errors.New("Timeout")
-var lastEventRecvTime = time.Now().Unix()
 
 // Connection is the event socket connection handler.
 type Connection struct {
@@ -271,12 +270,7 @@ func (h *Connection) ReadEvent() (*Event, error) {
 // 	case err = <-h.err:
 // 		return nil, err
 	case ev = <-h.evt:
-		lastEventRecvTime = time.Now().Unix()
 		return ev, nil
-	default:
-		if time.Now().Unix() - lastEventRecvTime > 60{
-			return nil, errTimeout
-		}
 	}
 }
 

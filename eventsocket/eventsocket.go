@@ -271,10 +271,10 @@ func (h *Connection) ReadEvent() (*Event, error) {
 // 	case err = <-h.err:
 // 		return nil, err
 	case ev = <-h.evt:
-		timeEventRecv = time.Now().Unix()
+		lastEventRecvTime = time.Now().Unix()
 		return ev, nil
 	default:
-		if time.Now().Unix() - timeEventRecv > 60{
+		if time.Now().Unix() - lastEventRecvTime > 60{
 			return nil, errTimeout
 		}
 	}

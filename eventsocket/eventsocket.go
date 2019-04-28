@@ -271,8 +271,8 @@ func (h *Connection) ReadEvent() (*Event, error) {
 // 		return nil, err
 	case ev = <-h.evt:
 		return ev, nil
-	default:
-		return nil, nil
+	case <-time.Tick(60*time.Second):
+		return nil, errTimeout
 	}
 }
 
